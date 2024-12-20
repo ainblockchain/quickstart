@@ -19,13 +19,10 @@ async function main() {
       nonce: -1,
     });
 
+  console.log('tx_hash:', res.tx_hash);
   // 0: success, if not 0, check the error code:
   // https://github.com/ainblockchain/ain-blockchain/blob/master/common/result-code.js
   console.log('code:', res.result.code);
-  console.log('tx_hash:', res.tx_hash);
-  // example output:
-  // code: 0
-  // tx_hash: 0x...
 }
 
 main();

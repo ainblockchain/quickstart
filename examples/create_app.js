@@ -28,10 +28,9 @@ async function main() {
   });
 
   console.log('tx_hash:', res.tx_hash);
-  console.log('code:', res.result.code); // 0: success, if not 0, check the error code: https://github.com/ainblockchain/ain-blockchain/blob/master/common/result-code.js
-  // example output:
-  // tx_hash: 0x...
-  // code: 0
+  // 0: success, if not 0, check the error code:
+  // https://github.com/ainblockchain/ain-blockchain/blob/master/common/result-code.js
+  console.log('code:', res.result.code);
 
   // get app owner at /apps/${appName}
   const owner = await ain.db.ref(appPath).getOwner();

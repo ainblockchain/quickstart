@@ -26,7 +26,9 @@ async function main() {
   console.log('--------------------------------');
 
   console.log('tx_hash:', res.tx_hash);
-  console.log('code:', res.result.code); // 0: success, if not 0, check the error code: https://github.com/ainblockchain/ain-blockchain/blob/master/common/result-code.js
+  // 0: success, if not 0, check the error code:
+  // https://github.com/ainblockchain/ain-blockchain/blob/master/common/result-code.js
+  console.log('code:', res.result.code);
 }
 
 main();
