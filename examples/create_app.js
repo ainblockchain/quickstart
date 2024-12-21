@@ -1,12 +1,19 @@
 const Ain = require('@ainblockchain/ain-js').default;
+const { sleep } = require('./utils');
 
-const ain = new Ain('https://testnet-api.ainetwork.ai');
+const ain = new Ain('https://testnet-api.ainetwork.ai', 'wss://testnet-event.ainetwork.ai', 0);
+
+// if you want to use mainnet, uncomment the following line:
+// const ain = new Ain('https://mainnet-api.ainetwork.ai', 'wss://mainnet-event.ainetwork.ai', 1);
 
 async function main() {
   // import the account using private key
   const address = ain.wallet.addAndSetDefaultAccount('YOUR_PRIVATE_KEY');
 
-  const appName = 'YOUR_APP_NAME'; // define a unique app name (rename if write rule error occurs)
+  // define a unique app name
+  // the app name can only contain letters, numbers, and underscores(_)
+  // rename if write rule error occurs
+  const appName = 'YOUR_APP_NAME';
   const appPath = `/apps/${appName}`;
 
   // create an app at /apps/${appName}
@@ -18,7 +25,7 @@ async function main() {
       },
       service: {
         staking: {
-          lockup_duration: 604800000, // 7d in ms
+          lockup_duration: 604800000, // 7d
         },
       },
     },
@@ -28,9 +35,11 @@ async function main() {
   });
 
   console.log('tx_hash:', res.tx_hash);
-  // 0: success, if not 0, check the error code:
-  // https://github.com/ainblockchain/ain-blockchain/blob/master/common/result-code.js
   console.log('code:', res.result.code);
+  // 0: success, if not 0, check the error code: 
+  // https://github.com/ainblockchain/ain-blockchain/blob/master/common/result-code.js
+
+  await sleep(5000); // 5s
 
   // get app owner at /apps/${appName}
   const owner = await ain.db.ref(appPath).getOwner();

@@ -1,6 +1,9 @@
 const Ain = require('@ainblockchain/ain-js').default;
 
-const ain = new Ain('https://testnet-api.ainetwork.ai');
+const ain = new Ain('https://testnet-api.ainetwork.ai', 'wss://testnet-event.ainetwork.ai', 0);
+
+// if you want to use mainnet, uncomment the following line:
+// const ain = new Ain('https://mainnet-api.ainetwork.ai', 'wss://mainnet-event.ainetwork.ai', 1);
 
 function main() {
   // create new account
